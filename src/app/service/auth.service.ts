@@ -10,6 +10,7 @@ import { Usuario } from '../model/Usuario';
 })
 export class AuthService {
 
+  
   constructor(
     private http: HttpClient
   ) { }
@@ -24,6 +25,10 @@ export class AuthService {
 
     return this.http.post<Usuario>('https://blogpessoalpaulopdm.herokuapp.com/usuarios/cadastrar', usuario)
 
+  }
+
+  getByIdUser(id: number): Observable<Usuario>{
+    return this.http.get<Usuario>(`https://blogpessoalpaulopdm.herokuapp.com/usuarios/${id}`)
   }
 
   logado(){

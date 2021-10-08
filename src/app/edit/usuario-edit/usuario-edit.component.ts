@@ -43,22 +43,21 @@ export class UsuarioEditComponent implements OnInit {
     this.tipoUsuario = event.target.value
   }
 
-  atualizar() {
+  atualizar(){
     this.user.tipo = this.tipoUsuario
 
-    if (this.user.senha != this.confirmarSenha) {
-      alert('As senhas não combinam!')
-
+    if(this.user.senha != this.confirmarSenha) {
+      alert('As senhas estão incorretas.')
     } else {
-      this.authService.cadastrar(this.user).subscribe((resp: Usuario) => {
+      this.authService.atualizar(this.user).subscribe((resp: Usuario) => {
         this.user = resp
-        this.router.navigate(['/entrar'])
-        alert('Usuário atualizado com sucesso, faça o login novamente.')
-        this.router.navigate(['/entrar'])
+        
+        alert('Usuário atualizado com sucesso, faça o login novamente')
+
+        environment.id = 0
         environment.token = ''
         environment.nome = ''
         environment.foto = ''
-        environment.id = 0
 
         this.router.navigate(['/entrar'])
       })
